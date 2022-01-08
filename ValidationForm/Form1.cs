@@ -27,17 +27,23 @@ namespace ValidationForm
             if (student != null)
             {
                 List<ValidationResult> results = new StudentValidation().Validate(student);
-
+                string errorToShow = "";
                 foreach (ValidationResult result in results)
                 {
                     if (!result.isValid)
                     {
-                        MessageBox.Show(result.message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
+                        errorToShow += result.message + "\n";
                     }
                 }
 
-                MessageBox.Show("Submit form successfully!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (errorToShow.Length > 0)
+                {
+                    MessageBox.Show(errorToShow, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("Submit form successfully!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
             }
         }
