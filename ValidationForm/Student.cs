@@ -8,6 +8,7 @@ namespace ValidationForm
 {
     class Student
     {
+        [LengthValidator(1, 10)]
         public string Email { get; set; }
         public string Name { get; set; }
         public string StudentId { get; set; }

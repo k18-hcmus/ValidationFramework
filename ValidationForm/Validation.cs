@@ -34,5 +34,27 @@ namespace ValidationForm
 
             return validationResults;
         }
+
+        public static List<ValidationResult> TryValidateObject(T validateObj)
+        {
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+
+            var properties = validateObj.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                foreach (var attr in property.GetCustomAttributes(false))
+                {
+                    ValidatorStrategy validatorStrategy = attr as ValidatorStrategy;
+                    if (validatorStrategy != null)
+                    {
+                        Console.WriteLine((string)(property.GetValue(validateObj)));
+                        ValidationResult result = validatorStrategy.Validate((string)(property.GetValue(validateObj)));
+                        validationResults.Add(result);
+                    }
+                }
+            }
+
+            return validationResults;
+        }
     }
 }
