@@ -12,7 +12,7 @@ namespace ValidationForm
         {
             RuleFor(student => student.Email).Use(new EmailValidator()).Use(new LengthValidator(8));
             RuleFor(student => student.Name).Use(new LengthValidator(6, 12));
-            RuleFor(student => student.StudentId).Use(new NotEmptyValidator());
+            RuleFor(student => student.StudentId).Use(new NotEmptyValidator()).Use(new CustomValidator((value) => value.Length == 1));
         }
     }
 }

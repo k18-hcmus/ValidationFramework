@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ValidationForm
 {
-    abstract class ValidatorStrategy
+    [AttributeUsage(AttributeTargets.Property)]
+    abstract class ValidatorStrategy : Attribute
     {
         public virtual ValidationResult Validate(string value)
         {
