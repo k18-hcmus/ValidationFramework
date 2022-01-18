@@ -8,14 +8,13 @@ namespace ValidationForm
 {
     class NotEmptyValidator : ValidatorStrategy
     {
-        protected override string GetFailureMessage()
+        string _defaultMessage = "This field could not be null";
+        public NotEmptyValidator(string failureMessage = "") : base(failureMessage)
         {
-            return "This field could not be null";
-        }
-
-        protected override string GetSuccessMessage()
-        {
-            return "OK!";
+            if(string.IsNullOrEmpty(failureMessage))
+            {
+                this.failureMessage = _defaultMessage;
+            }
         }
 
         protected override bool Test(string value)

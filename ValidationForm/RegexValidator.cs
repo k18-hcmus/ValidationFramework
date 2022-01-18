@@ -9,6 +9,13 @@ namespace ValidationForm
 {
     abstract class RegexValidator : ValidatorStrategy
     {
+        string _defaultMessage = "Regex validator failed";
+        public RegexValidator(string failureMessage = ""): base(failureMessage)
+        {
+            if (string.IsNullOrEmpty(failureMessage)) {
+                this.failureMessage = _defaultMessage;
+            }
+        }
         protected override bool Test(string value)
         {
             return Regex.IsMatch(value, GetRegex());

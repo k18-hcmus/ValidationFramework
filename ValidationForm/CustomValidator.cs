@@ -9,14 +9,15 @@ namespace ValidationForm
     class CustomValidator : ValidatorStrategy
     {
         Func<string, bool> _action;
-        protected override string GetFailureMessage()
-        {
-            return "False";
-        }
+        string _defaultMessage = "This field is not valid";
 
-        public CustomValidator(Func<string, bool> action)
+        public CustomValidator(Func<string, bool> action, string failureMessage = "") : base(failureMessage)
         {
             _action = action;
+            if (string.IsNullOrEmpty(failureMessage))
+            {
+                this.failureMessage = _defaultMessage;
+            }
         }
 
         protected override string GetSuccessMessage()
