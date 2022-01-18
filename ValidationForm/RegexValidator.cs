@@ -7,12 +7,22 @@ using System.Text.RegularExpressions;
 
 namespace ValidationForm
 {
-    abstract class RegexValidator : ValidatorStrategy
+    class RegexValidator : ValidatorStrategy
     {
         string _defaultMessage = "Regex validator failed";
-        public RegexValidator(string failureMessage = ""): base(failureMessage)
+        string _regex;
+        public RegexValidator(string regex, string failureMessage = "") : base(failureMessage)
         {
-            if (string.IsNullOrEmpty(failureMessage)) {
+            if (string.IsNullOrEmpty(failureMessage))
+            {
+                this.failureMessage = _defaultMessage;
+            }
+            this._regex = regex;
+        }
+        public RegexValidator(string failureMessage = "") : base(failureMessage)
+        {
+            if (string.IsNullOrEmpty(failureMessage))
+            {
                 this.failureMessage = _defaultMessage;
             }
         }
@@ -21,6 +31,9 @@ namespace ValidationForm
             return Regex.IsMatch(value, GetRegex());
         }
 
-        protected abstract string GetRegex();
+        protected virtual string GetRegex()
+        {
+            return _regex;
+        }
     }
 }
