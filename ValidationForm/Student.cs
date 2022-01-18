@@ -10,8 +10,10 @@ namespace ValidationForm
     {
         [EmailValidator()]
         public string Email { get; set; }
-        [NotEmptyValidator()]
+        [NotEmptyValidator("Name can not be empty!")]
+        [LengthValidator(1, 50)]
         public string Name { get; set; }
+        [LengthValidator(1, 50)]
         public string StudentId { get; set; }
     }
 }

@@ -26,8 +26,8 @@ namespace ValidationForm
             Debug.WriteLine(student.ToString());
             if (student != null)
             {
+                List<ValidationResult> results = new StudentValidation().Validate(student);
                 //List<ValidationResult> results = new StudentValidation().Validate(student);
-                List<ValidationResult> results = Validation<Student>.TryValidateObject(student);
 
                 string errorToShow = "";
                 foreach (ValidationResult result in results)
